@@ -36,6 +36,9 @@ const QUEUE_CHANNELS_FILE = path.join(
 
 const TESTER_ROLE_NAME = "TESTER";
 
+// Rola Discord, której posiadacze dostają niebieski napis "TESTER" na stronie
+const TESTER_DISCORD_ROLE_ID = "1548482122430419014";
+
 const app = express();
 
 // ==================================================
@@ -1099,6 +1102,66 @@ const client =
     });
 
 // ==================================================
+// ROLA TESTER (do oznaczenia na stronie)
+// ==================================================
+
+const testerCache = new Map();
+const TESTER_CACHE_MS = 5 * 60 * 1000;
+
+async function hasTesterRole(discordId) {
+
+    const cached = testerCache.get(discordId);
+
+    if (
+        cached &&
+        Date.now() - cached.time < TESTER_CACHE_MS
+    ) {
+        return cached.value;
+    }
+
+    try {
+
+        const guild =
+            await client.guilds.fetch(GUILD_ID);
+
+        const member =
+            await guild.members.fetch(discordId);
+
+        const value =
+            member.roles.cache.has(
+                TESTER_DISCORD_ROLE_ID
+            );
+
+        testerCache.set(discordId, {
+            value,
+            time: Date.now()
+        });
+
+        return value;
+
+    } catch (error) {
+
+        // 10007 = gracza nie ma na serwerze -> po prostu nie jest testerem
+        if (error?.code === 10007) {
+
+            testerCache.set(discordId, {
+                value: false,
+                time: Date.now()
+            });
+
+            return false;
+
+        }
+
+        // inny błąd (np. limit zapytań) - nie zapamiętujemy, zwracamy ostatnią znaną wartość
+        return cached ? cached.value : false;
+
+    }
+
+}
+
+
+// ==================================================
 // API
 // ==================================================
 
@@ -1126,16 +1189,22 @@ app.get(
 
 app.get(
     "/api/players",
-    (req, res) => {
+    async (req, res) => {
 
         const players =
+            await Promise.all(
             Object.entries(data)
                 .filter(
                     ([discordId, player]) =>
                         hasAnyTier(player)
                 )
                 .map(
-                    ([discordId, player]) => {
+                    async ([discordId, player]) => {
+
+                        const tester =
+                            await hasTesterRole(
+                                discordId
+                            );
 
                         const minecraft =
                             getMinecraftData(
@@ -1144,6 +1213,8 @@ app.get(
 
                         return {
                             discordId,
+
+                            tester,
 
                             name:
                                 minecraft?.username ||
@@ -1201,7 +1272,8 @@ app.get(
                                 null
                         };
                     }
-                );
+                )
+            );
 
         res.json(players);
     }
