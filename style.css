@@ -3249,3 +3249,34 @@ header h1 img {
     .player-overall-inline { margin-left:7px; font-size:11px; padding:2px 5px; }
     .all-players-header .overall-heading { font-size:9px; }
 }
+
+
+
+/* =========================================================
+   NIEBIESKI NAPIS "TESTER" OBOK NICKU
+   ========================================================= */
+
+.tester-badge {
+    display: inline-block;
+
+    margin-left: 6px;
+    padding: 1px 6px;
+
+    border: 1px solid rgba(90, 169, 255, 0.55);
+    border-radius: 5px;
+
+    background: rgba(60, 140, 255, 0.14);
+    color: #5aa9ff;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+
+    vertical-align: middle;
+}
+
+/* w kolumnach nick nie rozpycha się na całą szerokość, żeby napis stał obok niego */
+.tier-player-name {
+    flex: 0 1 auto;
+}
