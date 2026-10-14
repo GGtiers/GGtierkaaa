@@ -49,7 +49,8 @@ async function loadPlayers() {
     try {
 
         const response = await fetch(
-            `${API_URL}/api/players`
+            `${API_URL}/api/players`,
+            { cache: "no-store" }
         );
 
 
