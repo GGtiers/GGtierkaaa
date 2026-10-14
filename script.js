@@ -166,6 +166,9 @@ minecraftUsername:
                     player.subhuman ??
                     false,
 
+                tester:
+                    player.tester === true,
+
 
                 tiers: {
 
@@ -735,6 +738,8 @@ function renderModeColumns(tierlist, mode) {
                         ${escapeHTML(player.name)}
                     </span>
 
+                    ${testerBadge(player)}
+
                     ${
                         player.subhuman
                             ? `<span class="subhuman-badge">SUBHUMAN</span>`
@@ -795,6 +800,19 @@ if (tierlistElement) {
 
         }
     );
+
+}
+
+
+// ========================================
+// NIEBIESKI NAPIS "TESTER" OBOK NICKU
+// ========================================
+
+function testerBadge(player) {
+
+    return player.tester
+        ? `<span class="tester-badge">TESTER</span>`
+        : "";
 
 }
 
@@ -900,6 +918,8 @@ function renderOverallTable() {
                         <span class="player-name-text">
 
                             ${player.name}
+
+                            ${testerBadge(player)}
 
                             ${
                                 player.subhuman
@@ -1152,6 +1172,8 @@ function openPlayerModal(player) {
         <span>
 
             ${player.name}
+
+            ${testerBadge(player)}
 
             <span class="modal-place">
                 #${place}
