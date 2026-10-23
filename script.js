@@ -115,6 +115,16 @@ function readPlayerTiers(apiPlayer) {
 }
 
 
+// Niebieski napis TESTER przy nicku (gdy gracz ma rolę TESTER na Discordzie)
+function renderTesterBadge(player) {
+
+    return player && player.tester
+        ? `<span class="tester-badge">TESTER</span>`
+        : "";
+
+}
+
+
 function renderModeIcon(icon) {
 
     if (
@@ -277,6 +287,11 @@ minecraftUsername:
                 subhuman:
                     player.subhuman ??
                     false,
+
+
+                // niebieski napis TESTER (rola na Discordzie)
+                tester:
+                    player.tester === true,
 
 
                 tiers:
@@ -805,6 +820,8 @@ function renderModeColumns(tierlist, mode) {
                         ${escapeHTML(player.name)}
                     </span>
 
+                    ${renderTesterBadge(player)}
+
                     ${
                         player.subhuman
                             ? `<span class="subhuman-badge">SUBHUMAN</span>`
@@ -967,6 +984,8 @@ function renderOverallTable() {
                         <span class="player-name-text">
 
                             ${player.name}
+
+                            ${renderTesterBadge(player)}
 
                             ${
                                 player.subhuman
@@ -1223,6 +1242,8 @@ function openPlayerModal(player) {
             <span class="modal-place">
                 #${place}
             </span>
+
+            ${renderTesterBadge(player)}
 
             ${
                 player.subhuman
