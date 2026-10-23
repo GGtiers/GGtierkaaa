@@ -3201,82 +3201,35 @@ header h1 img {
 }
 
 
-/* V6: nagłówek Overall, złota punktacja przy nicku i właściwe kolory tierów. */
-.all-players-header > .player-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 7px;
-    gap: 10px;
-}
-.all-players-header .overall-heading {
-    color: #f2bd32;
-    font-size: 10px;
-    font-weight: 900;
-    flex: 0 0 auto;
-}
-.player-name {
-    gap: 8px;
-}
-.player-name-text {
-    flex: 0 1 auto;
-    max-width: 100%;
-}
-.player-overall-inline {
-    margin-left: 9px;
-    flex: 0 0 auto;
-    border-color: #f2bd32;
-    background: linear-gradient(180deg, #765313, #49320d);
-    color: #ffe08a;
-    box-shadow: inset 0 0 0 1px rgba(242,189,50,.18);
-}
-/* Wzmocniona specyficzność, by ogólne reguły pastylek nie nadpisywały kolorów. */
-.tier-pill.high-tier.tier-1, .tier-pill.low-tier.tier-1 { --tier-color:#f2bd32; --tier-bg:#765313; }
-.tier-pill.high-tier.tier-2, .tier-pill.low-tier.tier-2 { --tier-color:#c5d0d9; --tier-bg:#596873; }
-.tier-pill.high-tier.tier-3, .tier-pill.low-tier.tier-3 { --tier-color:#c9825d; --tier-bg:#683b2b; }
-.tier-pill.high-tier.tier-4, .tier-pill.low-tier.tier-4 { --tier-color:#ff5364; --tier-bg:#791e2a; }
-.tier-pill.high-tier.tier-5, .tier-pill.low-tier.tier-5 { --tier-color:#b58aff; --tier-bg:#4a2a80; }
-.tier-pill.high-tier { background:var(--tier-bg) !important; color:#fff !important; border-color:var(--tier-color) !important; }
-.tier-pill.low-tier { background:rgba(10,10,10,.9) !important; color:var(--tier-color) !important; border-color:var(--tier-color) !important; }
-/* Odrobinkę mniejsze niż w v5, bez utraty czytelności. */
-.badge-circle { width:38px; height:38px; }
-.badge-icon-emoji { font-size:20px; }
-.tier-pill { font-size:11px; padding:2px 5px; }
-@media (max-width:650px) {
-    .badge-circle { width:33px; height:33px; }
-    .badge-icon-emoji { font-size:17px; }
-    .tier-pill { font-size:10px; padding:2px 4px; }
-    .player-overall-inline { margin-left:7px; font-size:11px; padding:2px 5px; }
-    .all-players-header .overall-heading { font-size:9px; }
-}
-
-
-
 /* =========================================================
-   NIEBIESKI NAPIS "TESTER" OBOK NICKU
+   TESTER (niebieski napis przy nicku)
    ========================================================= */
 
 .tester-badge {
-    display: inline-block;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
 
     margin-left: 6px;
-    padding: 1px 6px;
+    padding: 3px 7px;
 
-    border: 1px solid rgba(90, 169, 255, 0.55);
     border-radius: 5px;
 
-    background: rgba(60, 140, 255, 0.14);
-    color: #5aa9ff;
+    background: rgba(59, 130, 246, 0.15);
 
-    font-size: 10px;
+    border: 1px solid rgba(59, 130, 246, 0.55);
+
+    color: #5aa2ff;
+
+    font-size: 9px;
     font-weight: 800;
+
     letter-spacing: 0.5px;
-    line-height: 1.5;
 
     vertical-align: middle;
-}
 
-/* w kolumnach nick nie rozpycha się na całą szerokość, żeby napis stał obok niego */
-.tier-player-name {
-    flex: 0 1 auto;
+    white-space: nowrap;
+
 }
