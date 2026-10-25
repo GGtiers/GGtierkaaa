@@ -117,8 +117,8 @@ const GGtiersConfig = {
             icon: "images/Gildie.png"
         },
          {
-            id: "Dpot",
-            name: "Dpot",
+            id: "Potpvp",
+            name: "Potpvp",
             icon: "images/Dpot.png"
         },
         {
