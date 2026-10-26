@@ -85,7 +85,7 @@ const GGtiersConfig = {
         },
 
         {
-            id: "Crystal",
+            id: "Cpvp",
             name: "Crystal",
             icon: "images/Cpvp.png"
         },
